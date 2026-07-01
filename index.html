@@ -1,11 +1,235 @@
 <!doctype html>
-<html lang="en">
+<html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>快乐周的快乐小天地 🎉</title>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+
+      body {
+        font-family: "Comic Sans MS", "PingFang SC", "Microsoft YaHei", sans-serif;
+        background: linear-gradient(135deg, #ffd6e8 0%, #fff3c4 50%, #c4f0ff 100%);
+        color: #4a3f55;
+        overflow-x: hidden;
+        min-height: 100vh;
+      }
+
+      /* 顶部大标题 */
+      header {
+        text-align: center;
+        padding: 40px 20px 20px;
+      }
+      header h1 {
+        font-size: clamp(2rem, 6vw, 4rem);
+        color: #ff5f8f;
+        text-shadow: 3px 3px 0 #fff, 6px 6px 0 rgba(255, 95, 143, 0.2);
+        animation: bounce 2s ease-in-out infinite;
+      }
+      header p {
+        margin-top: 12px;
+        font-size: 1.2rem;
+        color: #7a6f85;
+      }
+
+      @keyframes bounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-12px); }
+      }
+
+      /* 飘动的表情 */
+      .floaties {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        overflow: hidden;
+        z-index: 0;
+      }
+      .floaties span {
+        position: absolute;
+        font-size: 2rem;
+        animation: floatUp linear infinite;
+        opacity: 0.8;
+      }
+      @keyframes floatUp {
+        0% { transform: translateY(110vh) rotate(0deg); }
+        100% { transform: translateY(-15vh) rotate(360deg); }
+      }
+
+      /* 卡片区域 */
+      .cards {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 24px;
+        max-width: 1000px;
+        margin: 20px auto 60px;
+        padding: 0 20px;
+      }
+      .card {
+        background: rgba(255, 255, 255, 0.85);
+        border-radius: 24px;
+        padding: 28px 22px;
+        text-align: center;
+        box-shadow: 0 8px 20px rgba(255, 143, 177, 0.25);
+        cursor: pointer;
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+        border: 3px solid #fff;
+      }
+      .card:hover {
+        transform: translateY(-10px) rotate(-2deg) scale(1.03);
+        box-shadow: 0 16px 30px rgba(255, 143, 177, 0.4);
+      }
+      .card .emoji {
+        font-size: 3.5rem;
+        display: block;
+        margin-bottom: 12px;
+      }
+      .card h2 {
+        color: #ff5f8f;
+        font-size: 1.4rem;
+        margin-bottom: 8px;
+      }
+      .card p {
+        font-size: 1rem;
+        color: #6b5f78;
+        line-height: 1.6;
+      }
+
+      /* 蜡笔小新特别卡片 */
+      .shinchan {
+        grid-column: 1 / -1;
+        background: linear-gradient(120deg, #ffe680, #ffcf4d);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+      .shinchan .big-emoji { font-size: 5rem; }
+      .shinchan .text { text-align: left; max-width: 420px; }
+      .shinchan h2 { color: #d94f00; }
+
+      /* 底部互动按钮 */
+      .fun-zone {
+        position: relative;
+        z-index: 1;
+        text-align: center;
+        margin-bottom: 60px;
+      }
+      #funBtn {
+        font-family: inherit;
+        font-size: 1.3rem;
+        padding: 16px 40px;
+        border: none;
+        border-radius: 50px;
+        background: #ff5f8f;
+        color: #fff;
+        cursor: pointer;
+        box-shadow: 0 6px 0 #d94070;
+        transition: transform 0.1s ease;
+      }
+      #funBtn:active { transform: translateY(4px); box-shadow: 0 2px 0 #d94070; }
+      #funMsg {
+        margin-top: 20px;
+        font-size: 1.5rem;
+        min-height: 40px;
+        color: #ff5f8f;
+        font-weight: bold;
+      }
+    </style>
   </head>
   <body>
-    <a href="./ClaudeCodeCheatSheet.html"> ClaudeCodeCheatSheet </a>
+    <!-- 飘动的可爱表情背景 -->
+    <div class="floaties" id="floaties"></div>
+
+    <header>
+      <h1>🎉 快乐周的快乐小天地 🎉</h1>
+      <p>她是一个超级快乐的小姑娘，喜欢的东西全都在这里啦！</p>
+    </header>
+
+    <main class="cards">
+      <!-- 蜡笔小新 -->
+      <section class="card shinchan">
+        <span class="big-emoji">🖍️😜</span>
+        <div class="text">
+          <h2>蜡笔小新</h2>
+          <p>“大家好，我叫野原新之助，今年五岁！” 最爱动感超人，
+             最爱扭屁股跳舞～ 快乐周也是小新的头号粉丝哦！</p>
+        </div>
+      </section>
+
+      <!-- 猫 -->
+      <section class="card">
+        <span class="emoji">🐱</span>
+        <h2>软软的猫咪</h2>
+        <p>喵～ 圆圆的眼睛、软软的爪子，
+           抱一抱就开心一整天！</p>
+      </section>
+
+      <!-- 吃 -->
+      <section class="card">
+        <span class="emoji">🍰🍜🍓</span>
+        <h2>好吃的东西</h2>
+        <p>蛋糕、面条、草莓、冰淇淋……
+           世界上最幸福的事就是吃吃吃！</p>
+      </section>
+
+      <!-- 做饭 -->
+      <section class="card">
+        <span class="emoji">🍳👩‍🍳</span>
+        <h2>一起做饭</h2>
+        <p>系上小围裙，煎个荷包蛋、
+           炒个小菜，当个快乐小厨师！</p>
+      </section>
+
+      <!-- 玩 -->
+      <section class="card">
+        <span class="emoji">🎈🧸🎮</span>
+        <h2>尽情地玩</h2>
+        <p>荡秋千、搭积木、捉迷藏，
+           玩到停不下来才叫快乐周！</p>
+      </section>
+    </main>
+
+    <div class="fun-zone">
+      <button id="funBtn">戳我一下有惊喜 🎁</button>
+      <div id="funMsg"></div>
+    </div>
+
+    <script>
+      // 生成飘动的可爱表情
+      const emojis = ["🖍️", "🐱", "🍰", "🍳", "🎈", "🍓", "🧸", "😜", "🍜", "🐾", "🎮", "🍦"];
+      const floatiesEl = document.getElementById("floaties");
+      for (let i = 0; i < 20; i++) {
+        const s = document.createElement("span");
+        s.textContent = emojis[i % emojis.length];
+        s.style.left = Math.random() * 100 + "vw";
+        s.style.animationDuration = 6 + Math.random() * 8 + "s";
+        s.style.animationDelay = Math.random() * 8 + "s";
+        s.style.fontSize = 1.5 + Math.random() * 2 + "rem";
+        floatiesEl.appendChild(s);
+      }
+
+      // 惊喜按钮
+      const messages = [
+        "快乐周今天也超级快乐！ 😆",
+        "喵～ 猫咪送你一个抱抱！ 🐱💕",
+        "开饭啦！ 今天吃草莓蛋糕！ 🍓🍰",
+        "小厨师快乐周正在煎荷包蛋～ 🍳",
+        "蜡笔小新和你一起扭屁股跳舞！ 🕺",
+        "走，我们出去玩啦！ 🎈🎉",
+      ];
+      const btn = document.getElementById("funBtn");
+      const msg = document.getElementById("funMsg");
+      let idx = 0;
+      btn.addEventListener("click", () => {
+        msg.textContent = messages[idx % messages.length];
+        msg.style.transform = "scale(1.2)";
+        setTimeout(() => (msg.style.transform = "scale(1)"), 150);
+        idx++;
+      });
+    </script>
   </body>
 </html>
